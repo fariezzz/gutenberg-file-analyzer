@@ -1,0 +1,1042 @@
+{
+  "meta": {
+    "nama": "Muhammad Fariez Riziq Ilham",
+    "nim": "247006111146",
+    "seed": 247006111146,
+    "params": {
+      "threads": 4,
+      "processes": 3,
+      "data_count": 1460
+    },
+    "baseline_method": "serial, same code path as hybrid worker, mean of 3 runs",
+    "created_at": "2026-10-01 23:41:42",
+    "repeats": 3,
+    "drift_check": {
+      "start_mean": 15.919,
+      "end_mean": 17.8638,
+      "drift_percent": 12.22,
+      "end_runs": [
+        19.0522,
+        17.1093,
+        17.4299
+      ]
+    }
+  },
+  "machine": {
+    "cpu_model": "AMD Ryzen 5 5600H with Radeon Graphics",
+    "physical_cores": 6,
+    "logical_cores": 12,
+    "ram_gb": 15.4,
+    "os": "Microsoft Windows 11 Home Single Language",
+    "python_version": "3.11.9",
+    "disk_type": "INTEL SSDPEKNU512GZ SSD NVMe"
+  },
+  "baselines": {
+    "500": {
+      "total_files": 500,
+      "data_count": 500,
+      "runs": [
+        15.7029,
+        15.9822,
+        16.0719
+      ],
+      "mean": 15.919,
+      "std": 0.1924,
+      "avg_phase_times": {
+        "io": 0.9027,
+        "cpu": 14.7589,
+        "reduce": 0.2573,
+        "total": 15.919
+      },
+      "total_bytes": 186871230,
+      "total_chars": 175996095,
+      "total_words": 30075338,
+      "total_vowels": 50520075,
+      "total_digits": 1357678,
+      "total_symbols": 7111602,
+      "total_sentences": 1656518,
+      "top_20_words": [
+        [
+          "the",
+          2037386
+        ],
+        [
+          "of",
+          1099129
+        ],
+        [
+          "and",
+          964619
+        ],
+        [
+          "to",
+          791675
+        ],
+        [
+          "a",
+          622344
+        ],
+        [
+          "in",
+          559242
+        ],
+        [
+          "that",
+          347375
+        ],
+        [
+          "i",
+          327668
+        ],
+        [
+          "was",
+          317298
+        ],
+        [
+          "he",
+          304212
+        ],
+        [
+          "it",
+          303563
+        ],
+        [
+          "is",
+          251109
+        ],
+        [
+          "his",
+          249483
+        ],
+        [
+          "for",
+          232121
+        ],
+        [
+          "with",
+          230383
+        ],
+        [
+          "as",
+          226056
+        ],
+        [
+          "had",
+          180189
+        ],
+        [
+          "on",
+          176136
+        ],
+        [
+          "you",
+          175813
+        ],
+        [
+          "by",
+          172044
+        ]
+      ],
+      "worker_stats": [
+        {
+          "pid": 2632,
+          "file_count": 500,
+          "total_bytes": 186871230,
+          "worker_time": 14.9015,
+          "batch_count": 20
+        }
+      ],
+      "cpu_freq_mhz": 2011.0,
+      "stability": "stable",
+      "discarded_runs": [
+        [
+          14.8309,
+          15.3307,
+          15.6408
+        ]
+      ]
+    },
+    "1000": {
+      "total_files": 1000,
+      "data_count": 1000,
+      "runs": [
+        33.4355,
+        33.8592,
+        34.1084
+      ],
+      "mean": 33.801,
+      "std": 0.3402,
+      "avg_phase_times": {
+        "io": 1.92,
+        "cpu": 31.3226,
+        "reduce": 0.5585,
+        "total": 33.801
+      },
+      "total_bytes": 385667144,
+      "total_chars": 364158025,
+      "total_words": 62534472,
+      "total_vowels": 104661410,
+      "total_digits": 2504390,
+      "total_symbols": 14714035,
+      "total_sentences": 3330584,
+      "top_20_words": [
+        [
+          "the",
+          4203069
+        ],
+        [
+          "of",
+          2241318
+        ],
+        [
+          "and",
+          1992874
+        ],
+        [
+          "to",
+          1652295
+        ],
+        [
+          "a",
+          1293065
+        ],
+        [
+          "in",
+          1154962
+        ],
+        [
+          "that",
+          735364
+        ],
+        [
+          "i",
+          689865
+        ],
+        [
+          "was",
+          658897
+        ],
+        [
+          "he",
+          645946
+        ],
+        [
+          "it",
+          631969
+        ],
+        [
+          "his",
+          528098
+        ],
+        [
+          "is",
+          522562
+        ],
+        [
+          "for",
+          479857
+        ],
+        [
+          "with",
+          478492
+        ],
+        [
+          "as",
+          478063
+        ],
+        [
+          "you",
+          385872
+        ],
+        [
+          "had",
+          380003
+        ],
+        [
+          "on",
+          370006
+        ],
+        [
+          "be",
+          361438
+        ]
+      ],
+      "worker_stats": [
+        {
+          "pid": 2632,
+          "file_count": 1000,
+          "total_bytes": 385667144,
+          "worker_time": 31.585,
+          "batch_count": 40
+        }
+      ],
+      "cpu_freq_mhz": 3301.0,
+      "stability": "stable",
+      "discarded_runs": [
+        [
+          32.2328,
+          32.9571,
+          34.0598
+        ]
+      ]
+    },
+    "1460": {
+      "total_files": 1460,
+      "data_count": 1460,
+      "runs": [
+        48.6525,
+        48.8238,
+        49.2312
+      ],
+      "mean": 48.9025,
+      "std": 0.2973,
+      "avg_phase_times": {
+        "io": 2.7996,
+        "cpu": 45.2595,
+        "reduce": 0.8433,
+        "total": 48.9025
+      },
+      "total_bytes": 564040843,
+      "total_chars": 532796781,
+      "total_words": 91700012,
+      "total_vowels": 153472926,
+      "total_digits": 3545233,
+      "total_symbols": 21344540,
+      "total_sentences": 4729834,
+      "top_20_words": [
+        [
+          "the",
+          6174819
+        ],
+        [
+          "of",
+          3316622
+        ],
+        [
+          "and",
+          2937917
+        ],
+        [
+          "to",
+          2416580
+        ],
+        [
+          "a",
+          1925853
+        ],
+        [
+          "in",
+          1708011
+        ],
+        [
+          "that",
+          1076074
+        ],
+        [
+          "i",
+          1002571
+        ],
+        [
+          "was",
+          976715
+        ],
+        [
+          "he",
+          939118
+        ],
+        [
+          "it",
+          932941
+        ],
+        [
+          "his",
+          773913
+        ],
+        [
+          "is",
+          757632
+        ],
+        [
+          "with",
+          710576
+        ],
+        [
+          "as",
+          703910
+        ],
+        [
+          "for",
+          699635
+        ],
+        [
+          "had",
+          557917
+        ],
+        [
+          "on",
+          547321
+        ],
+        [
+          "you",
+          546223
+        ],
+        [
+          "at",
+          528792
+        ]
+      ],
+      "worker_stats": [
+        {
+          "pid": 2632,
+          "file_count": 1460,
+          "total_bytes": 564040843,
+          "worker_time": 45.5491,
+          "batch_count": 59
+        }
+      ],
+      "cpu_freq_mhz": 2011.0,
+      "stability": "stable",
+      "discarded_runs": []
+    }
+  },
+  "configs": [
+    {
+      "id": 1,
+      "threads": 1,
+      "procs": 1,
+      "data": 1460,
+      "desc": "1T / 1P, 1460 file (Serial Baseline)",
+      "runs": [
+        48.6525,
+        48.8238,
+        49.2312
+      ],
+      "mean": 48.9025,
+      "std": 0.2973,
+      "cold": 48.6525,
+      "warm": 49.0275,
+      "speedup": 1.0,
+      "efficiency": 100.0,
+      "throughput": 29.86,
+      "avg_phase_times": {
+        "io": 2.7996,
+        "cpu": 45.2595,
+        "reduce": 0.8433,
+        "total": 48.9025
+      },
+      "worker_stats": [
+        {
+          "pid": 2632,
+          "file_count": 1460,
+          "total_bytes": 564040843,
+          "worker_time": 45.5491,
+          "batch_count": 59
+        }
+      ],
+      "cpu_freq_mhz": 2011.0,
+      "stability": "stable",
+      "discarded_runs": []
+    },
+    {
+      "id": 2,
+      "threads": 4,
+      "procs": 1,
+      "data": 1460,
+      "desc": "4T / 1P, 1460 file",
+      "runs": [
+        45.1542,
+        44.9079,
+        45.4411
+      ],
+      "mean": 45.1677,
+      "std": 0.2669,
+      "cold": 45.1542,
+      "warm": 45.1745,
+      "speedup": 1.08,
+      "efficiency": 108.0,
+      "throughput": 32.32,
+      "avg_phase_times": {
+        "io": 2.8519,
+        "cpu": 41.6282,
+        "reduce": 0.6875,
+        "total": 45.1677
+      },
+      "worker_stats": [
+        {
+          "pid": 19148,
+          "file_count": 1460,
+          "total_bytes": 564040843,
+          "worker_time": 40.6582,
+          "batch_count": 59
+        }
+      ],
+      "cpu_freq_mhz": 2011.0,
+      "stability": "stable",
+      "discarded_runs": []
+    },
+    {
+      "id": 3,
+      "threads": 1,
+      "procs": 3,
+      "data": 1460,
+      "desc": "1T / 3P, 1460 file",
+      "runs": [
+        23.9776,
+        24.445,
+        24.4061
+      ],
+      "mean": 24.2762,
+      "std": 0.2594,
+      "cold": 23.9776,
+      "warm": 24.4256,
+      "speedup": 2.01,
+      "efficiency": 67.0,
+      "throughput": 60.14,
+      "avg_phase_times": {
+        "io": 2.7795,
+        "cpu": 20.8468,
+        "reduce": 0.6499,
+        "total": 24.2762
+      },
+      "worker_stats": [
+        {
+          "pid": 2772,
+          "file_count": 500,
+          "total_bytes": 189099211,
+          "worker_time": 20.2841,
+          "batch_count": 20
+        },
+        {
+          "pid": 18856,
+          "file_count": 450,
+          "total_bytes": 174125748,
+          "worker_time": 20.3684,
+          "batch_count": 18
+        },
+        {
+          "pid": 18940,
+          "file_count": 510,
+          "total_bytes": 200815884,
+          "worker_time": 20.103,
+          "batch_count": 21
+        }
+      ],
+      "cpu_freq_mhz": 2011.0,
+      "stability": "stable",
+      "discarded_runs": []
+    },
+    {
+      "id": 4,
+      "threads": 2,
+      "procs": 3,
+      "data": 1460,
+      "desc": "2T / 3P, 1460 file",
+      "runs": [
+        24.5715,
+        24.0992,
+        24.7365
+      ],
+      "mean": 24.4691,
+      "std": 0.3308,
+      "cold": 24.5715,
+      "warm": 24.4179,
+      "speedup": 2.0,
+      "efficiency": 66.67,
+      "throughput": 59.67,
+      "avg_phase_times": {
+        "io": 2.8324,
+        "cpu": 20.9683,
+        "reduce": 0.6683,
+        "total": 24.4691
+      },
+      "worker_stats": [
+        {
+          "pid": 3344,
+          "file_count": 425,
+          "total_bytes": 174828512,
+          "worker_time": 20.5575,
+          "batch_count": 17
+        },
+        {
+          "pid": 11928,
+          "file_count": 560,
+          "total_bytes": 206107935,
+          "worker_time": 20.4922,
+          "batch_count": 23
+        },
+        {
+          "pid": 20144,
+          "file_count": 475,
+          "total_bytes": 183104396,
+          "worker_time": 20.5512,
+          "batch_count": 19
+        }
+      ],
+      "cpu_freq_mhz": 2011.0,
+      "stability": "stable",
+      "discarded_runs": []
+    },
+    {
+      "id": 5,
+      "threads": 4,
+      "procs": 3,
+      "data": 1460,
+      "desc": "4T / 3P, 1460 file (Konfigurasi NIM)",
+      "runs": [
+        24.5326,
+        24.3802,
+        24.337
+      ],
+      "mean": 24.4166,
+      "std": 0.1028,
+      "cold": 24.5326,
+      "warm": 24.3586,
+      "speedup": 2.0,
+      "efficiency": 66.67,
+      "throughput": 59.8,
+      "avg_phase_times": {
+        "io": 2.8577,
+        "cpu": 20.9082,
+        "reduce": 0.6506,
+        "total": 24.4166
+      },
+      "worker_stats": [
+        {
+          "pid": 10484,
+          "file_count": 525,
+          "total_bytes": 189442759,
+          "worker_time": 20.0989,
+          "batch_count": 21
+        },
+        {
+          "pid": 17692,
+          "file_count": 400,
+          "total_bytes": 167127244,
+          "worker_time": 20.1354,
+          "batch_count": 16
+        },
+        {
+          "pid": 18840,
+          "file_count": 535,
+          "total_bytes": 207470840,
+          "worker_time": 20.0741,
+          "batch_count": 22
+        }
+      ],
+      "cpu_freq_mhz": 2011.0,
+      "stability": "stable",
+      "discarded_runs": []
+    },
+    {
+      "id": 6,
+      "threads": 8,
+      "procs": 3,
+      "data": 1460,
+      "desc": "8T / 3P, 1460 file",
+      "runs": [
+        24.2205,
+        24.3683,
+        24.4657
+      ],
+      "mean": 24.3515,
+      "std": 0.1235,
+      "cold": 24.2205,
+      "warm": 24.417,
+      "speedup": 2.01,
+      "efficiency": 67.0,
+      "throughput": 59.96,
+      "avg_phase_times": {
+        "io": 2.8949,
+        "cpu": 20.7933,
+        "reduce": 0.6633,
+        "total": 24.3515
+      },
+      "worker_stats": [
+        {
+          "pid": 4384,
+          "file_count": 525,
+          "total_bytes": 202167845,
+          "worker_time": 20.2296,
+          "batch_count": 21
+        },
+        {
+          "pid": 13268,
+          "file_count": 510,
+          "total_bytes": 203253937,
+          "worker_time": 19.8878,
+          "batch_count": 21
+        },
+        {
+          "pid": 20500,
+          "file_count": 425,
+          "total_bytes": 158619061,
+          "worker_time": 19.8968,
+          "batch_count": 17
+        }
+      ],
+      "cpu_freq_mhz": 2011.0,
+      "stability": "stable",
+      "discarded_runs": []
+    },
+    {
+      "id": 7,
+      "threads": 4,
+      "procs": 2,
+      "data": 1460,
+      "desc": "4T / 2P, 1460 file",
+      "runs": [
+        35.9721,
+        34.5845,
+        34.9977
+      ],
+      "mean": 35.1848,
+      "std": 0.7125,
+      "cold": 35.9721,
+      "warm": 34.7911,
+      "speedup": 1.39,
+      "efficiency": 69.5,
+      "throughput": 41.5,
+      "avg_phase_times": {
+        "io": 2.8752,
+        "cpu": 31.6286,
+        "reduce": 0.6809,
+        "total": 35.1848
+      },
+      "worker_stats": [
+        {
+          "pid": 5932,
+          "file_count": 735,
+          "total_bytes": 277622538,
+          "worker_time": 30.2804,
+          "batch_count": 30
+        },
+        {
+          "pid": 20224,
+          "file_count": 725,
+          "total_bytes": 286418305,
+          "worker_time": 30.535,
+          "batch_count": 29
+        }
+      ],
+      "cpu_freq_mhz": 2011.0,
+      "stability": "stable",
+      "discarded_runs": []
+    },
+    {
+      "id": 8,
+      "threads": 4,
+      "procs": 6,
+      "data": 1460,
+      "desc": "4T / 6P, 1460 file",
+      "runs": [
+        16.8515,
+        16.8807,
+        17.6045
+      ],
+      "mean": 17.1122,
+      "std": 0.4266,
+      "cold": 16.8515,
+      "warm": 17.2426,
+      "speedup": 2.86,
+      "efficiency": 47.67,
+      "throughput": 85.32,
+      "avg_phase_times": {
+        "io": 2.8508,
+        "cpu": 13.6,
+        "reduce": 0.6614,
+        "total": 17.1122
+      },
+      "worker_stats": [
+        {
+          "pid": 1604,
+          "file_count": 275,
+          "total_bytes": 95772352,
+          "worker_time": 13.5253,
+          "batch_count": 11
+        },
+        {
+          "pid": 12476,
+          "file_count": 225,
+          "total_bytes": 97420719,
+          "worker_time": 12.9543,
+          "batch_count": 9
+        },
+        {
+          "pid": 16484,
+          "file_count": 200,
+          "total_bytes": 88681480,
+          "worker_time": 13.0834,
+          "batch_count": 8
+        },
+        {
+          "pid": 16624,
+          "file_count": 275,
+          "total_bytes": 92371217,
+          "worker_time": 13.4455,
+          "batch_count": 11
+        },
+        {
+          "pid": 19036,
+          "file_count": 260,
+          "total_bytes": 98797468,
+          "worker_time": 12.9968,
+          "batch_count": 11
+        },
+        {
+          "pid": 20060,
+          "file_count": 225,
+          "total_bytes": 90997607,
+          "worker_time": 12.9639,
+          "batch_count": 9
+        }
+      ],
+      "cpu_freq_mhz": 3301.0,
+      "stability": "stable",
+      "discarded_runs": []
+    },
+    {
+      "id": 9,
+      "threads": 4,
+      "procs": 3,
+      "data": 500,
+      "desc": "4T / 3P, 500 file",
+      "runs": [
+        8.4184,
+        8.2234,
+        8.2606
+      ],
+      "mean": 8.3008,
+      "std": 0.1035,
+      "cold": 8.4184,
+      "warm": 8.242,
+      "speedup": 1.92,
+      "efficiency": 64.0,
+      "throughput": 60.24,
+      "avg_phase_times": {
+        "io": 0.96,
+        "cpu": 7.1324,
+        "reduce": 0.2084,
+        "total": 8.3008
+      },
+      "worker_stats": [
+        {
+          "pid": 5168,
+          "file_count": 150,
+          "total_bytes": 48295176,
+          "worker_time": 6.3882,
+          "batch_count": 6
+        },
+        {
+          "pid": 12916,
+          "file_count": 200,
+          "total_bytes": 80871021,
+          "worker_time": 6.7116,
+          "batch_count": 8
+        },
+        {
+          "pid": 20424,
+          "file_count": 150,
+          "total_bytes": 57705033,
+          "worker_time": 6.5882,
+          "batch_count": 6
+        }
+      ],
+      "cpu_freq_mhz": 2011.0,
+      "stability": "stable",
+      "discarded_runs": []
+    },
+    {
+      "id": 10,
+      "threads": 4,
+      "procs": 3,
+      "data": 1000,
+      "desc": "4T / 3P, 1000 file",
+      "runs": [
+        17.0669,
+        17.1232,
+        17.159
+      ],
+      "mean": 17.1164,
+      "std": 0.0464,
+      "cold": 17.0669,
+      "warm": 17.1411,
+      "speedup": 1.97,
+      "efficiency": 65.67,
+      "throughput": 58.42,
+      "avg_phase_times": {
+        "io": 1.9849,
+        "cpu": 14.6871,
+        "reduce": 0.4443,
+        "total": 17.1164
+      },
+      "worker_stats": [
+        {
+          "pid": 3236,
+          "file_count": 300,
+          "total_bytes": 110880210,
+          "worker_time": 13.6724,
+          "batch_count": 12
+        },
+        {
+          "pid": 8328,
+          "file_count": 425,
+          "total_bytes": 172746546,
+          "worker_time": 14.1973,
+          "batch_count": 17
+        },
+        {
+          "pid": 20556,
+          "file_count": 275,
+          "total_bytes": 102040388,
+          "worker_time": 13.4999,
+          "batch_count": 11
+        }
+      ],
+      "cpu_freq_mhz": 2011.0,
+      "stability": "stable",
+      "discarded_runs": []
+    }
+  ],
+  "corpus": {
+    "total_files": 1460,
+    "total_bytes": 564040843,
+    "total_size_mb": 537.91,
+    "total_chars": 532796781,
+    "total_words": 91700012,
+    "total_vowels": 153472926,
+    "total_digits": 3545233,
+    "total_symbols": 21344540,
+    "total_sentences": 4729834,
+    "top_words_20": [
+      {
+        "word": "the",
+        "count": 6174819
+      },
+      {
+        "word": "of",
+        "count": 3316622
+      },
+      {
+        "word": "and",
+        "count": 2937917
+      },
+      {
+        "word": "to",
+        "count": 2416580
+      },
+      {
+        "word": "a",
+        "count": 1925853
+      },
+      {
+        "word": "in",
+        "count": 1708011
+      },
+      {
+        "word": "that",
+        "count": 1076074
+      },
+      {
+        "word": "i",
+        "count": 1002571
+      },
+      {
+        "word": "was",
+        "count": 976715
+      },
+      {
+        "word": "he",
+        "count": 939118
+      },
+      {
+        "word": "it",
+        "count": 932941
+      },
+      {
+        "word": "his",
+        "count": 773913
+      },
+      {
+        "word": "is",
+        "count": 757632
+      },
+      {
+        "word": "with",
+        "count": 710576
+      },
+      {
+        "word": "as",
+        "count": 703910
+      },
+      {
+        "word": "for",
+        "count": 699635
+      },
+      {
+        "word": "had",
+        "count": 557917
+      },
+      {
+        "word": "on",
+        "count": 547321
+      },
+      {
+        "word": "you",
+        "count": 546223
+      },
+      {
+        "word": "at",
+        "count": 528792
+      }
+    ],
+    "file_size_histogram": {
+      "< 100 KB": 278,
+      "100 KB - 250 KB": 344,
+      "250 KB - 500 KB": 487,
+      "500 KB - 1 MB": 267,
+      "> 1 MB": 84
+    }
+  },
+  "validation": {
+    "config_1": {
+      "valid": true,
+      "message": "VALID (100% cocok dengan serial baseline)"
+    },
+    "config_2": {
+      "valid": true,
+      "message": "VALID (Hasil serial dan hybrid 100% identik)"
+    },
+    "config_3": {
+      "valid": true,
+      "message": "VALID (Hasil serial dan hybrid 100% identik)"
+    },
+    "config_4": {
+      "valid": true,
+      "message": "VALID (Hasil serial dan hybrid 100% identik)"
+    },
+    "config_5": {
+      "valid": true,
+      "message": "VALID (Hasil serial dan hybrid 100% identik)"
+    },
+    "config_6": {
+      "valid": true,
+      "message": "VALID (Hasil serial dan hybrid 100% identik)"
+    },
+    "config_7": {
+      "valid": true,
+      "message": "VALID (Hasil serial dan hybrid 100% identik)"
+    },
+    "config_8": {
+      "valid": true,
+      "message": "VALID (Hasil serial dan hybrid 100% identik)"
+    },
+    "config_9": {
+      "valid": true,
+      "message": "VALID (Hasil serial dan hybrid 100% identik)"
+    },
+    "config_10": {
+      "valid": true,
+      "message": "VALID (Hasil serial dan hybrid 100% identik)"
+    }
+  }
+}

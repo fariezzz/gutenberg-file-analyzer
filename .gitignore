@@ -1,0 +1,31 @@
+# Python cache & runtime
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Virtual Environments
+venv/
+.venv/
+env/
+.env/
+
+# Large Datasets & Catalogs
+# pg_catalog.csv (~21MB) & 1,460 raw text books (~538MB)
+pg_catalog.csv
+data_wc_real/
+
+# Local Temporary Backups
+*backup*/
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS / Execution logs
+*.log

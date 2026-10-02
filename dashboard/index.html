@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parallel File Analyzer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="chart.min.js"></script>
+</head>
+<body class="theme-dark">
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="header-brand">
+        <h1 class="brand-title">Parallel File Analyzer</h1>
+        <span class="brand-sub">Muhammad Fariez Riziq Ilham | NIM 247006111146</span>
+      </div>
+      <button id="theme-toggle" class="btn-theme" aria-label="Toggle theme">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div id="data-alert" class="alert-box hidden">
+      <strong>Data tidak tersedia.</strong> Berkas <code>results.json</code> belum ditemukan. Jalankan <code>python benchmark.py</code> terlebih dahulu.
+    </div>
+  </div>
+
+  <main class="container main-content">
+
+    <!-- Ringkasan konfigurasi -->
+    <section class="section" id="sec-summary">
+      <div class="config-bar">
+        <div class="config-params">
+          <span class="config-val" id="kpi-nim-threads">4</span><span class="config-unit">Thread</span>
+          <span class="config-dot"></span>
+          <span class="config-val" id="kpi-nim-procs">3</span><span class="config-unit">Process</span>
+          <span class="config-dot"></span>
+          <span class="config-val" id="kpi-nim-data">1.460</span><span class="config-unit">File</span>
+        </div>
+      </div>
+
+      <div class="metric-strip">
+        <div class="metric-cell">
+          <div class="metric-num font-mono" id="kpi-nim-time">—</div>
+          <div class="metric-label">Waktu Eksekusi</div>
+          <div class="metric-aux font-mono" id="kpi-nim-baseline">—</div>
+        </div>
+        <div class="metric-cell metric-cell-primary">
+          <div class="metric-num metric-num-lg font-mono" id="kpi-nim-speedup">—</div>
+          <div class="metric-label">Speedup</div>
+          <div class="metric-aux">vs baseline serial</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-num font-mono" id="kpi-nim-efficiency">—</div>
+          <div class="metric-label">Efisiensi</div>
+          <div class="metric-aux">utilisasi P=3</div>
+        </div>
+        <div class="metric-cell">
+          <div class="metric-num font-mono" id="kpi-throughput">—</div>
+          <div class="metric-label">Throughput</div>
+          <div class="metric-aux font-mono" id="kpi-throughput-mb">—</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spesifikasi sistem -->
+    <section class="section" id="sec-system">
+      <h2 class="section-heading">Sistem</h2>
+      <div class="spec-grid">
+        <div class="spec-item"><span class="spec-k">CPU</span><span class="spec-v font-mono" id="spec-cpu">—</span></div>
+        <div class="spec-item"><span class="spec-k">Core</span><span class="spec-v font-mono" id="spec-cores">—</span></div>
+        <div class="spec-item"><span class="spec-k">RAM</span><span class="spec-v font-mono" id="spec-ram">—</span></div>
+        <div class="spec-item"><span class="spec-k">OS</span><span class="spec-v font-mono" id="spec-os">—</span></div>
+        <div class="spec-item"><span class="spec-k">Python</span><span class="spec-v font-mono" id="spec-python">—</span></div>
+        <div class="spec-item"><span class="spec-k">Storage</span><span class="spec-v font-mono" id="spec-disk">—</span></div>
+        <div class="spec-item"><span class="spec-k">Seed</span><span class="spec-v font-mono">247006111146</span></div>
+      </div>
+    </section>
+
+    <!-- Grafik kinerja utama -->
+    <section class="section" id="sec-perf">
+      <h2 class="section-heading">Kinerja</h2>
+      <p class="section-note"><span class="legend-dot legend-dot-accent"></span> Biru: konfigurasi NIM (4T / 3P) &nbsp;&middot;&nbsp; <span class="legend-dot legend-dot-green"></span> Hijau: konfigurasi tercepat (1.460 file)</p>
+
+      <div class="chart-row chart-row-twin">
+        <div class="chart-box">
+          <div class="chart-head">
+            <div>
+              <h3 class="chart-title">Waktu vs Jumlah Process</h3>
+              <p class="chart-sub">Thread=4, 1.460 file</p>
+            </div>
+            <button class="btn-dl" data-target="canvas-procs">PNG</button>
+          </div>
+          <div class="chart-canvas-wrap chart-canvas-tall"><canvas id="canvas-procs"></canvas></div>
+        </div>
+
+        <div class="chart-box">
+          <div class="chart-head">
+            <div>
+              <h3 class="chart-title">Waktu vs Jumlah Thread</h3>
+              <p class="chart-sub">Process=3, 1.460 file</p>
+            </div>
+            <button class="btn-dl" data-target="canvas-threads">PNG</button>
+          </div>
+          <div class="chart-canvas-wrap"><canvas id="canvas-threads"></canvas></div>
+          <p class="chart-footnote font-mono" id="threads-note"></p>
+        </div>
+      </div>
+
+      <div class="chart-row chart-row-half">
+        <div class="chart-box">
+          <div class="chart-head">
+            <div>
+              <h3 class="chart-title">Speedup vs Konfigurasi</h3>
+              <p class="chart-sub">Relatif terhadap baseline per ukuran data</p>
+            </div>
+            <button class="btn-dl" data-target="canvas-speedup">PNG</button>
+          </div>
+          <div class="chart-canvas-wrap"><canvas id="canvas-speedup"></canvas></div>
+        </div>
+
+        <div class="chart-box">
+          <div class="chart-head">
+            <div>
+              <h3 class="chart-title">Efisiensi Paralelisme</h3>
+              <p class="chart-sub">Garis merah putus-putus = ideal 100%</p>
+            </div>
+            <button class="btn-dl" data-target="canvas-efficiency">PNG</button>
+          </div>
+          <div class="chart-canvas-wrap"><canvas id="canvas-efficiency"></canvas></div>
+          <p class="chart-footnote">Efisiensi = speedup / jumlah proses. Nilai di atas 100% berarti baseline serial lebih lambat per unit kerja daripada satu worker proses; jika ada, jelaskan di laporan.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabel hasil eksperimen -->
+    <section class="section" id="sec-table">
+      <div class="section-head-split">
+        <h2 class="section-heading">Hasil Eksperimen</h2>
+        <button id="btn-export-csv" class="btn-outline">Unduh CSV</button>
+      </div>
+      <p class="section-note">10 konfigurasi, 3 repetisi. Klik header kolom untuk mengurutkan.</p>
+
+      <div class="table-wrap">
+        <table class="tbl" id="benchmark-table">
+          <thead>
+            <tr>
+              <th data-key="id" class="sortable tc">No</th>
+              <th data-key="desc" class="sortable">Deskripsi</th>
+              <th data-key="threads" class="sortable tc">Jumlah Thread</th>
+              <th data-key="procs" class="sortable tc">Jumlah Process</th>
+              <th data-key="data" class="sortable tc">Data/Task</th>
+              <th data-key="mean" class="sortable tr">Waktu (s)</th>
+              <th data-key="std" class="sortable tr">Std Dev</th>
+              <th data-key="speedup" class="sortable tr">Speedup</th>
+              <th data-key="efficiency" class="sortable tr">Efisiensi (%)</th>
+              <th data-key="throughput" class="sortable tr">Throughput</th>
+            </tr>
+          </thead>
+          <tbody id="benchmark-tbody">
+            <tr><td colspan="10" class="tc">Memuat data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Analisis fase dan worker -->
+    <section class="section" id="sec-analysis">
+      <h2 class="section-heading">Analisis</h2>
+
+      <div class="chart-row chart-row-half">
+        <div class="chart-box">
+          <div class="chart-head">
+            <div>
+              <h3 class="chart-title">Dekomposisi Fase</h3>
+              <p class="chart-sub">I/O, CPU, Reduce per konfigurasi (stacked)</p>
+            </div>
+            <button class="btn-dl" data-target="canvas-phases">PNG</button>
+          </div>
+          <div class="chart-canvas-wrap"><canvas id="canvas-phases"></canvas></div>
+        </div>
+
+        <div class="chart-box">
+          <div class="chart-head">
+            <div>
+              <h3 class="chart-title">Cold vs Warm Run</h3>
+              <p class="chart-sub">Efek disk cache: run pertama vs rata-rata run 2–3</p>
+            </div>
+            <button class="btn-dl" data-target="canvas-cold-warm">PNG</button>
+          </div>
+          <div class="chart-canvas-wrap"><canvas id="canvas-cold-warm"></canvas></div>
+        </div>
+      </div>
+
+      <div class="worker-panel">
+        <h3 class="panel-title">Load Balancing Worker (4T / 3P)</h3>
+        <div class="table-wrap">
+          <table class="tbl tbl-compact">
+            <thead>
+              <tr>
+                <th>Worker</th>
+                <th class="font-mono">PID</th>
+                <th class="tr">File</th>
+                <th class="tr">MB</th>
+                <th class="tr">Waktu (s)</th>
+                <th class="tr">Beban %</th>
+              </tr>
+            </thead>
+            <tbody id="worker-balance-container"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dataset -->
+    <section class="section" id="sec-dataset">
+      <h2 class="section-heading">Dataset</h2>
+      <p class="corpus-summary font-mono" id="dataset-summary-text">—</p>
+
+      <div class="chart-row chart-row-half">
+        <div class="chart-box">
+          <div class="chart-head">
+            <h3 class="chart-title">Top-20 Kata</h3>
+          </div>
+          <div class="words-grid" id="top-words-container"></div>
+        </div>
+
+        <div class="chart-box">
+          <div class="chart-head">
+            <div>
+              <h3 class="chart-title">Distribusi Ukuran File</h3>
+              <p class="chart-sub">Histogram kapasitas berkas</p>
+            </div>
+            <button class="btn-dl" data-target="canvas-histogram">PNG</button>
+          </div>
+          <div class="chart-canvas-wrap"><canvas id="canvas-histogram"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>Parallel File Analyzer</span>
+      <span class="footer-copy">Muhammad Fariez Riziq Ilham</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

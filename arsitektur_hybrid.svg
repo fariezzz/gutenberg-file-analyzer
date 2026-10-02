@@ -1,0 +1,243 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800" width="100%" height="100%">
+  <defs>
+    <!-- Background Grid Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+    </pattern>
+
+    <!-- Arrow Marker Teal / Cyan -->
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#22d3ee"/>
+    </marker>
+
+    <!-- Arrow Marker Emerald -->
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#34d399"/>
+    </marker>
+
+    <!-- Arrow Marker Violet -->
+    <marker id="arrow-violet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#a78bfa"/>
+    </marker>
+
+    <!-- Arrow Marker Amber -->
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#fbbf24"/>
+    </marker>
+
+    <!-- Arrow Marker Slate -->
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#94a3b8"/>
+    </marker>
+
+    <style>
+      .text-title { font-family: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace; font-size: 16px; font-weight: bold; fill: #f8fafc; }
+      .text-subtitle { font-family: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace; font-size: 12px; fill: #94a3b8; }
+      .text-header { font-family: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace; font-size: 12px; font-weight: bold; letter-spacing: 0.5px; }
+      .text-node-title { font-family: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace; font-size: 11.5px; font-weight: bold; fill: #f1f5f9; }
+      .text-node-desc { font-family: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace; font-size: 9.5px; fill: #94a3b8; }
+      .text-badge { font-family: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace; font-size: 8.5px; font-weight: bold; }
+      .text-edge { font-family: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace; font-size: 9px; fill: #64748b; }
+    </style>
+  </defs>
+
+  <!-- Deep Slate Background -->
+  <rect width="1100" height="800" fill="#020617"/>
+  <rect width="1100" height="800" fill="url(#grid)"/>
+
+  <!-- Diagram Title Header -->
+  <g transform="translate(40, 36)">
+    <circle cx="6" cy="6" r="4" fill="#38bdf8"/>
+    <text x="18" y="10" class="text-title">ARSITEKTUR HYBRID COMPUTING — PARALLEL FILE ANALYZER</text>
+    <text x="18" y="27" class="text-subtitle">Pemisahan Task-Parallel I/O (ThreadPool) dan CPU-Bound Analysis (ProcessPool) dengan Adaptive Batching</text>
+  </g>
+
+  <!-- ================= CONNECTION LINES (Behind Cards) ================= -->
+  <!-- Storage to Phase 1 (ThreadPool) -->
+  <path d="M 285 155 L 340 155" fill="none" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrow-cyan)"/>
+
+  <!-- ThreadPool to 4 Threads (Fan-out) -->
+  <path d="M 480 155 L 530 115" fill="none" stroke="#22d3ee" stroke-width="1.2" marker-end="url(#arrow-cyan)"/>
+  <path d="M 480 155 L 530 145" fill="none" stroke="#22d3ee" stroke-width="1.2" marker-end="url(#arrow-cyan)"/>
+  <path d="M 480 155 L 530 175" fill="none" stroke="#22d3ee" stroke-width="1.2" marker-end="url(#arrow-cyan)"/>
+  <path d="M 480 155 L 530 205" fill="none" stroke="#22d3ee" stroke-width="1.2" marker-end="url(#arrow-cyan)"/>
+
+  <!-- 4 Threads to Adaptive Batching (Fan-in) -->
+  <path d="M 870 115 C 930 115, 930 295, 730 295" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
+  <path d="M 870 145 C 910 145, 910 295, 730 295" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
+  <path d="M 870 175 C 890 175, 890 295, 730 295" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
+  <path d="M 870 205 C 870 240, 850 295, 730 295" fill="none" stroke="#38bdf8" stroke-width="1.2" marker-end="url(#arrow-cyan)"/>
+
+  <!-- Adaptive Batching down to Phase 2 (ProcessPool) -->
+  <path d="M 550 330 L 550 375" fill="none" stroke="#34d399" stroke-width="1.5" marker-end="url(#arrow-emerald)"/>
+
+  <!-- ProcessPool to 3 Worker Processes (Fan-out) -->
+  <path d="M 460 410 L 260 460" fill="none" stroke="#34d399" stroke-width="1.2" marker-end="url(#arrow-emerald)"/>
+  <path d="M 550 435 L 550 460" fill="none" stroke="#34d399" stroke-width="1.2" marker-end="url(#arrow-emerald)"/>
+  <path d="M 640 410 L 840 460" fill="none" stroke="#34d399" stroke-width="1.2" marker-end="url(#arrow-emerald)"/>
+
+  <!-- 3 Workers down to Reducer (Fan-in) -->
+  <path d="M 260 550 C 260 590, 480 590, 520 620" fill="none" stroke="#a78bfa" stroke-width="1.2" marker-end="url(#arrow-violet)"/>
+  <path d="M 550 550 L 550 620" fill="none" stroke="#a78bfa" stroke-width="1.2" marker-end="url(#arrow-violet)"/>
+  <path d="M 840 550 C 840 590, 620 590, 580 620" fill="none" stroke="#a78bfa" stroke-width="1.2" marker-end="url(#arrow-violet)"/>
+
+  <!-- Reducer to Outputs -->
+  <path d="M 460 660 L 260 705" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrow-slate)"/>
+  <path d="M 550 685 L 550 705" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrow-slate)"/>
+  <path d="M 640 660 L 840 705" fill="none" stroke="#94a3b8" stroke-width="1.2" marker-end="url(#arrow-slate)"/>
+
+  <!-- ================= SUBGRAPH / REGION BOUNDARIES ================= -->
+
+  <!-- Subgraph 0: Storage Layer -->
+  <rect x="40" y="85" width="265" height="150" rx="8" fill="rgba(15, 23, 42, 0.6)" stroke="#334155" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="55" y="108" class="text-header" fill="#94a3b8">PENYIMPANAN DATA LOKAL</text>
+
+  <!-- Subgraph 1: Phase 1 I/O Thread Pool -->
+  <rect x="325" y="85" width="735" height="150" rx="8" fill="rgba(8, 51, 68, 0.25)" stroke="#0e7490" stroke-width="1.2"/>
+  <text x="340" y="108" class="text-header" fill="#22d3ee">FASE 1: I/O-BOUND READ &amp; CLEANING (THREAD POOL)</text>
+  <rect x="910" y="94" width="135" height="18" rx="3" fill="#083344" stroke="#0891b2" stroke-width="0.8"/>
+  <text x="920" y="106" class="text-badge" fill="#38bdf8">GIL RELEASED DURING I/O</text>
+
+  <!-- Subgraph 1.5: Adaptive Batch Partitioning -->
+  <rect x="370" y="260" width="360" height="70" rx="8" fill="rgba(30, 41, 59, 0.4)" stroke="#475569" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="385" y="280" class="text-header" fill="#cbd5e1">ADAPTIVE BATCH PARTITIONING</text>
+
+  <!-- Subgraph 2: Phase 2 CPU Process Pool -->
+  <rect x="40" y="355" width="1020" height="220" rx="8" fill="rgba(6, 78, 59, 0.2)" stroke="#059669" stroke-width="1.2"/>
+  <text x="55" y="378" class="text-header" fill="#34d399">FASE 2: CPU-BOUND STATISTICAL ANALYSIS (PROCESS POOL)</text>
+  <rect x="880" y="364" width="165" height="18" rx="3" fill="#064e3b" stroke="#10b981" stroke-width="0.8"/>
+  <text x="890" y="376" class="text-badge" fill="#6ee7b7">BYPASS GIL (INDEPENDENT CORES)</text>
+
+  <!-- Subgraph 3: Phase 3 Aggregation Reducer & Output -->
+  <rect x="40" y="595" width="1020" height="170" rx="8" fill="rgba(76, 29, 149, 0.2)" stroke="#7c3aed" stroke-width="1.2"/>
+  <text x="55" y="618" class="text-header" fill="#a78bfa">FASE 3: AGREGASI, VALIDASI &amp; VISUALISASI (MAIN PROCESS)</text>
+
+  <!-- ================= COMPONENT CARDS ================= -->
+
+  <!-- Card: Dataset Files -->
+  <g transform="translate(55, 120)">
+    <rect width="235" height="48" rx="5" fill="#0f172a" stroke="#475569" stroke-width="1.2"/>
+    <rect width="235" height="48" rx="5" fill="rgba(30, 41, 59, 0.5)"/>
+    <text x="12" y="20" class="text-node-title">1.460 File Teks Gutenberg</text>
+    <text x="12" y="36" class="text-node-desc">data_wc_real/*.txt (Total: 537.91 MB)</text>
+  </g>
+
+  <!-- Card: Manifest File -->
+  <g transform="translate(55, 175)">
+    <rect width="235" height="48" rx="5" fill="#0f172a" stroke="#475569" stroke-width="1.2"/>
+    <rect width="235" height="48" rx="5" fill="rgba(30, 41, 59, 0.5)"/>
+    <text x="12" y="20" class="text-node-title">manifest.csv (Urutan Deterministik)</text>
+    <text x="12" y="36" class="text-node-desc">Seed NIM 247006111146 (Reproducible)</text>
+  </g>
+
+  <!-- Card: ThreadPoolExecutor Controller -->
+  <g transform="translate(340, 125)">
+    <rect width="140" height="60" rx="5" fill="#0f172a" stroke="#22d3ee" stroke-width="1.5"/>
+    <rect width="140" height="60" rx="5" fill="rgba(8, 51, 68, 0.5)"/>
+    <text x="12" y="24" class="text-node-title">ThreadPoolExecutor</text>
+    <text x="12" y="40" class="text-node-desc">4 Worker Threads (NIM)</text>
+    <text x="12" y="52" class="text-node-desc">concurrent.futures</text>
+  </g>
+
+  <!-- Cards: 4 Worker Threads -->
+  <g transform="translate(530, 100)">
+    <rect width="340" height="24" rx="4" fill="#0f172a" stroke="#0891b2" stroke-width="1"/>
+    <rect width="340" height="24" rx="4" fill="rgba(8, 51, 68, 0.35)"/>
+    <text x="10" y="16" class="text-node-title">Thread-1: Read &amp; Strip Boilerplate Header/Footer</text>
+  </g>
+  <g transform="translate(530, 130)">
+    <rect width="340" height="24" rx="4" fill="#0f172a" stroke="#0891b2" stroke-width="1"/>
+    <rect width="340" height="24" rx="4" fill="rgba(8, 51, 68, 0.35)"/>
+    <text x="10" y="16" class="text-node-title">Thread-2: Read &amp; Strip Boilerplate Header/Footer</text>
+  </g>
+  <g transform="translate(530, 160)">
+    <rect width="340" height="24" rx="4" fill="#0f172a" stroke="#0891b2" stroke-width="1"/>
+    <rect width="340" height="24" rx="4" fill="rgba(8, 51, 68, 0.35)"/>
+    <text x="10" y="16" class="text-node-title">Thread-3: Read &amp; Strip Boilerplate Header/Footer</text>
+  </g>
+  <g transform="translate(530, 190)">
+    <rect width="340" height="24" rx="4" fill="#0f172a" stroke="#0891b2" stroke-width="1"/>
+    <rect width="340" height="24" rx="4" fill="rgba(8, 51, 68, 0.35)"/>
+    <text x="10" y="16" class="text-node-title">Thread-4: Read &amp; Strip Boilerplate Header/Footer</text>
+  </g>
+
+  <!-- Card: Batch Aggregator -->
+  <g transform="translate(385, 275)">
+    <rect width="330" height="46" rx="5" fill="#0f172a" stroke="#38bdf8" stroke-width="1.2"/>
+    <rect width="330" height="46" rx="5" fill="rgba(14, 165, 233, 0.15)"/>
+    <text x="12" y="19" class="text-node-title">Pengelompokan Batch Teks Bersih</text>
+    <text x="12" y="35" class="text-node-desc">Batch Size = 15–25 File (Mereduksi Overhead IPC/Pickle)</text>
+  </g>
+
+  <!-- Card: ProcessPoolExecutor Controller -->
+  <g transform="translate(460, 385)">
+    <rect width="180" height="50" rx="5" fill="#0f172a" stroke="#34d399" stroke-width="1.5"/>
+    <rect width="180" height="50" rx="5" fill="rgba(6, 78, 59, 0.5)"/>
+    <text x="14" y="20" class="text-node-title">ProcessPoolExecutor</text>
+    <text x="14" y="36" class="text-node-desc">3 Worker Processes (NIM)</text>
+  </g>
+
+  <!-- Cards: 3 Process Workers (Across Physical Cores) -->
+  <g transform="translate(60, 460)">
+    <rect width="290" height="90" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1.2"/>
+    <rect width="290" height="90" rx="6" fill="rgba(6, 78, 59, 0.3)"/>
+    <text x="12" y="22" class="text-node-title">Worker Process 1 (Core Fisik 1)</text>
+    <text x="12" y="40" class="text-node-desc">• Tokenisasi Regex Kata (\b[a-zA-Z]+\b)</text>
+    <text x="12" y="56" class="text-node-desc">• Hitung Vokal, Angka, Simbol, Kalimat</text>
+    <text x="12" y="74" class="text-node-desc">• Word Frequency: collections.Counter()</text>
+  </g>
+
+  <g transform="translate(405, 460)">
+    <rect width="290" height="90" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1.2"/>
+    <rect width="290" height="90" rx="6" fill="rgba(6, 78, 59, 0.3)"/>
+    <text x="12" y="22" class="text-node-title">Worker Process 2 (Core Fisik 2)</text>
+    <text x="12" y="40" class="text-node-desc">• Tokenisasi Regex Kata (\b[a-zA-Z]+\b)</text>
+    <text x="12" y="56" class="text-node-desc">• Hitung Vokal, Angka, Simbol, Kalimat</text>
+    <text x="12" y="74" class="text-node-desc">• Word Frequency: collections.Counter()</text>
+  </g>
+
+  <g transform="translate(750, 460)">
+    <rect width="290" height="90" rx="6" fill="#0f172a" stroke="#10b981" stroke-width="1.2"/>
+    <rect width="290" height="90" rx="6" fill="rgba(6, 78, 59, 0.3)"/>
+    <text x="12" y="22" class="text-node-title">Worker Process 3 (Core Fisik 3)</text>
+    <text x="12" y="40" class="text-node-desc">• Tokenisasi Regex Kata (\b[a-zA-Z]+\b)</text>
+    <text x="12" y="56" class="text-node-desc">• Hitung Vokal, Angka, Simbol, Kalimat</text>
+    <text x="12" y="74" class="text-node-desc">• Word Frequency: collections.Counter()</text>
+  </g>
+
+  <!-- Card: Reducer Main Process -->
+  <g transform="translate(430, 625)">
+    <rect width="240" height="55" rx="6" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
+    <rect width="240" height="55" rx="6" fill="rgba(76, 29, 149, 0.4)"/>
+    <text x="14" y="22" class="text-node-title">Reducer / Aggregator Utama</text>
+    <text x="14" y="38" class="text-node-desc">Merge Counter &amp; Ringkasan Metrik</text>
+    <text x="14" y="50" class="text-node-desc">Validasi Identik Serial vs Hybrid</text>
+  </g>
+
+  <!-- Output Cards -->
+  <g transform="translate(60, 705)">
+    <rect width="250" height="46" rx="5" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+    <rect width="250" height="46" rx="5" fill="rgba(30, 41, 59, 0.4)"/>
+    <text x="10" y="18" class="text-node-title">Output Terminal Terformat</text>
+    <text x="10" y="34" class="text-node-desc">Speedup, Efisiensi, Top-10 Kata</text>
+  </g>
+
+  <g transform="translate(425, 705)">
+    <rect width="250" height="46" rx="5" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+    <rect width="250" height="46" rx="5" fill="rgba(30, 41, 59, 0.4)"/>
+    <text x="10" y="18" class="text-node-title">results.json &amp; results.csv</text>
+    <text x="10" y="34" class="text-node-desc">10 Konfigurasi x 3 Repetisi Nyata</text>
+  </g>
+
+  <g transform="translate(790, 705)">
+    <rect width="250" height="46" rx="5" fill="#0f172a" stroke="#64748b" stroke-width="1"/>
+    <rect width="250" height="46" rx="5" fill="rgba(30, 41, 59, 0.4)"/>
+    <text x="10" y="18" class="text-node-title">Dashboard Visualisasi Web</text>
+    <text x="10" y="34" class="text-node-desc">Chart.js Lokal (http://localhost:8000)</text>
+  </g>
+
+  <!-- Footer Watermark / Metadata -->
+  <g transform="translate(40, 786)">
+    <text x="0" y="0" class="text-edge">Muhammad Fariez Riziq Ilham · NIM 247006111146 · Teknik Informatika Universitas Siliwangi</text>
+  </g>
+</svg>
