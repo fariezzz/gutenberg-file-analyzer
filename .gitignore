@@ -29,3 +29,6 @@ Thumbs.db
 
 # OS / Execution logs
 *.log
+
+# Miscellaneous Docs & Internal Drafts
+docs/misc/

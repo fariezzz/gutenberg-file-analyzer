@@ -6,9 +6,7 @@ Tema: Hybrid Computing for Real-World Simulation and Data Processing
 import os
 import random
 
-# ==============================================================================
-# IDENTITAS & PARAMETER MAHASISWA (NIM: 247006111146)
-# ==============================================================================
+# IDENTITAS & PARAMETER MAHASISWA
 NAMA = "Muhammad Fariez Riziq Ilham"
 NIM = "247006111146"
 SEED = 247006111146
@@ -26,9 +24,7 @@ DATA_COUNT = 146 * 10
 # Inisialisasi seed acak global untuk reproduksibilitas
 random.seed(SEED)
 
-# ==============================================================================
 # PATH DIREKTORI & FILE
-# ==============================================================================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data_wc_real")
 MANIFEST_PATH = os.path.join(BASE_DIR, "manifest.csv")
@@ -36,7 +32,6 @@ RESULTS_DIR = os.path.join(BASE_DIR, "results")
 CHARTS_DIR = os.path.join(RESULTS_DIR, "charts")
 DASHBOARD_DIR = os.path.join(BASE_DIR, "dashboard")
 
-BASELINES_FILE = os.path.join(RESULTS_DIR, "baselines.json")
 RESULTS_CSV = os.path.join(RESULTS_DIR, "results.csv")
 RESULTS_JSON = os.path.join(RESULTS_DIR, "results.json")
 

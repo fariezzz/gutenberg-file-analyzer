@@ -311,7 +311,7 @@ def chart_4_efficiency_vs_configs(configs, output_dir):
     from matplotlib.patches import Patch
     legend_elements = [
         plt.Line2D([0], [0], color="#ef4444", linestyle="--", linewidth=1.5, label="Efisiensi Ideal (100%)"),
-        Patch(facecolor="#d97706", edgecolor="#1e293b", label="Konfigurasi NIM (85.33%)"),
+        Patch(facecolor="#d97706", edgecolor="#1e293b", label="Konfigurasi NIM"),
         Patch(facecolor="#8b5cf6", edgecolor="#1e293b", label="4T / 1P (I/O Concurrency Efek)"),
         Patch(facecolor="#38bdf8", edgecolor="#1e293b", label="Konfigurasi Lainnya"),
     ]
