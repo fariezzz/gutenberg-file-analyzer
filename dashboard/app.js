@@ -346,16 +346,34 @@ document.addEventListener("DOMContentLoaded", () => {
       el.textContent = c.total_files.toLocaleString("id-ID") + " file / " + c.total_size_mb.toFixed(2) + " MB / " + c.total_words.toLocaleString("id-ID") + " kata / " + c.total_chars.toLocaleString("id-ID") + " karakter";
     }
 
-    // top-20 kata
+    // top-20 kata (1-10 di kolom kiri, 11-20 di kolom kanan)
     const wc = document.getElementById("top-words-container");
     if (wc && data.corpus && data.corpus.top_words_20) {
       wc.innerHTML = "";
-      data.corpus.top_words_20.forEach((item, i) => {
+      const words = data.corpus.top_words_20;
+      const mid = Math.ceil(words.length / 2);
+
+      const col1 = document.createElement("div");
+      col1.className = "words-col";
+      const col2 = document.createElement("div");
+      col2.className = "words-col";
+
+      words.slice(0, mid).forEach((item, i) => {
         const row = document.createElement("div");
         row.className = "word-row font-mono";
-        row.innerHTML = '<div><span class="word-rank">' + String(i+1).padStart(2,"0") + '.</span> <span class="word-term">' + item.word + '</span></div><span class="word-count-num">' + item.count.toLocaleString("id-ID") + '</span>';
-        wc.appendChild(row);
+        row.innerHTML = '<div><span class="word-rank">' + String(i + 1).padStart(2, "0") + '.</span> <span class="word-term">' + item.word + '</span></div><span class="word-count-num">' + item.count.toLocaleString("id-ID") + '</span>';
+        col1.appendChild(row);
       });
+
+      words.slice(mid).forEach((item, i) => {
+        const row = document.createElement("div");
+        row.className = "word-row font-mono";
+        row.innerHTML = '<div><span class="word-rank">' + String(mid + i + 1).padStart(2, "0") + '.</span> <span class="word-term">' + item.word + '</span></div><span class="word-count-num">' + item.count.toLocaleString("id-ID") + '</span>';
+        col2.appendChild(row);
+      });
+
+      wc.appendChild(col1);
+      wc.appendChild(col2);
     }
 
     // worker load balance
