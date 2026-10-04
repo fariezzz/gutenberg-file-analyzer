@@ -12,14 +12,18 @@
 ## 1. Deskripsi Proyek
 
 Proyek ini merupakan implementasi sistem komputasi paralel hibrida (*hybrid computing*) untuk menganalisis korpus teks berskala besar dari Project Gutenberg secara efisien. Sistem memadukan dua paradigma paralelisme:
-1. **Task / Thread Parallelism (`concurrent.futures.ThreadPoolExecutor`)**: Menangani pekerjaan *I/O-bound*, yaitu membaca berkas teks dari media penyimpanan dan membersihkan header/footer lisensi Gutenberg tanpa terhalang *Global Interpreter Lock* (GIL) Python.
-2. **Process Pool (`concurrent.futures.ProcessPoolExecutor`)**: Menangani komputasi berat *CPU-bound*, yaitu tokenisasi regex kata, kalimat, simbol, penghitungan vokal, angka, dan agregasi frekuensi kata (*word frequency counter*) pada proses-proses independen yang berjalan di atas core fisik prosesor terpisah.
+
+1. **Task / Thread Parallelism (`concurrent.futures.ThreadPoolExecutor`)**:  
+   Menangani pekerjaan *I/O-bound*, yaitu membaca berkas teks dari disk lokal dan membersihkan header/footer lisensi Gutenberg. Multi-threading pada tahap ini sangat efektif karena *Global Interpreter Lock* (GIL) Python secara otomatis dilepas selama operasi I/O tingkat sistem operasi.
+2. **Process Pool (`concurrent.futures.ProcessPoolExecutor`)**:  
+   Menangani komputasi berat *CPU-bound*, yaitu tokenisasi regex kata, penghitungan kalimat, simbol, vokal, angka, serta agregasi frekuensi kata (*word frequency counter*). Multi-processing memotong batas GIL dengan mendistribusikan beban ke proses-proses independen yang berjalan di atas core fisik prosesor terpisah.
 
 ---
 
 ## 2. Parameter Berdasarkan NIM (NIM: 247006111146)
 
-Berdasarkan rumus penentuan parameter pada naskah soal UTS:
+Seluruh parameter komputasi diturunkan secara unik dan deterministik dari NIM mahasiswa sesuai formula naskah soal UTS:
+
 - **Seed Acak Global**: `random.seed(247006111146)`
 - **Jumlah Thread ($T$)**:
   $$\text{Dua digit terakhir NIM mod } 4 + 2 = (46 \bmod 4) + 2 = 2 + 2 = \mathbf{4\text{ Thread}}$$
@@ -28,7 +32,7 @@ Berdasarkan rumus penentuan parameter pada naskah soal UTS:
 - **Jumlah Data File ($N$)**:
   $$\text{Tiga digit terakhir NIM} \times 10 = 146 \times 10 = \mathbf{1.460\text{ File Teks}}$$
 
-Seluruh konstanta ini dideklarasikan terpusat di `config.py` agar tidak ada angka ajaib (*magic numbers*) yang tersebar.
+Seluruh konstanta dideklarasikan terpusat di `config.py` sebagai sumber tunggal konfigurasi sistem.
 
 ---
 
@@ -36,46 +40,48 @@ Seluruh konstanta ini dideklarasikan terpusat di `config.py` agar tidak ada angk
 
 ```text
 file_analyzer/
-├── .gitignore                # Aturan pengecualian cache, dataset besar, dan draft
+├── .gitignore                # Aturan pengabaian cache, dataset besar, dan berkas draft
 ├── README.md                 # Dokumentasi komprehensif proyek
-├── config.py                 # Parameter terpusat (NAMA, NIM, SEED, THREADS, PROCESSES, DATA_COUNT, PATH)
+├── config.py                 # Parameter terpusat (NAMA, NIM, SEED, THREADS, PROCESSES, DATA_COUNT, PATHS)
 ├── analyzer.py               # Modul inti komputasi Serial dan Hybrid + validasi integritas
 ├── benchmark.py              # Runner benchmark 10 konfigurasi x 3 repetisi + warm-up & drift check
-├── make_charts.py            # Generator 5 grafik analisis beresolusi tinggi (300 DPI)
-├── render_diagram.py         # Skrip perender diagram arsitektur sistem (matplotlib)
-├── serve.py                  # Server web HTTP lokal untuk visualisasi dashboard (port 8000)
+├── make_charts.py            # Generator 5 grafik analisis kinerja resolusi tinggi (300 DPI)
+├── render_diagram.py         # Skrip perender diagram arsitektur sistem (output: arsitektur_hybrid.png)
+├── serve.py                  # Server web HTTP lokal untuk menyajikan dashboard visualisasi (port 8000)
 ├── manifest.csv              # Indeks urutan 1.460 file Gutenberg deterministik (seed NIM)
 ├── pg_catalog.csv            # Salinan katalog buku teks Project Gutenberg
-├── arsitektur_hybrid.png     # Gambar diagram arsitektur sistem (300 DPI)
-├── arsitektur_hybrid.svg     # Berkas grafik vektor diagram arsitektur
-├── data_wc_real/             # Direktori dataset 1.460 berkas teks Project Gutenberg (~538 MB)
+├── data_wc_real/             # Direktori dataset 1.460 berkas teks Project Gutenberg (~538 MiB)
 ├── results/
 │   ├── results.csv           # Tabel ringkasan 10 konfigurasi pengujian
-│   ├── results.json          # Data mentah lengkap, spesifikasi mesin, baselines, korpus, dan validation
-│   └── charts/               # Berkas grafik analisis kinerja (300 DPI)
+│   ├── results.json          # Data mentah lengkap, spesifikasi mesin, baselines, korpus, dan validasi
+│   └── charts/               # Berkas gambar grafik analisis hasil benchmark (300 DPI)
 │       ├── chart_1_time_vs_threads.png
 │       ├── chart_2_time_vs_processes.png
 │       ├── chart_3_speedup_vs_configs.png
 │       ├── chart_4_efficiency_vs_configs.png
 │       └── chart_5_phase_breakdown_stacked.png
-├── dashboard/                # Antarmuka web visualisasi mandiri (offline)
+├── dashboard/                # Antarmuka web visualisasi mandiri (offline tanpa CDN eksternal)
 │   ├── index.html            # Markup antarmuka bertema profiler teknis ilmiah
-│   ├── style.css             # Desain antarmuka (Dark & Light mode, high-contrast)
+│   ├── style.css             # Desain antarmuka (Dark & Light mode, palet kontras tinggi)
 │   ├── app.js                # Logika interaktif Chart.js, sortir tabel, dan ekspor CSV client-side
-│   └── chart.min.js          # Pustaka Chart.js v4.5.1 lokal (tanpa CDN eksternal)
+│   └── chart.min.js          # Pustaka Chart.js v4.5.1 lokal
 └── docs/
-    └── misc/                 # Berkas arsip draft laporan internal dan log sesi
+    └── misc/                 # Berkas arsip draft laporan internal dan skrip utilitas pendukung
 ```
 
 ---
 
 ## 4. Prasyarat & Instalasi
 
-Proyek ini hanya menggunakan pustaka standar Python 3 ditambah `psutil` dan `matplotlib`.
-Pastikan dependensi berikut terpasang di lingkungan Python Anda:
+Proyek ini dibangun di atas Python 3 (diuji pada Python 3.11.9 Windows / WSL). Sistem hanya memerlukan pustaka standar Python ditambah dua pustaka analisis/grafik:
 
 ```bash
-pip install matplotlib psutil python-docx
+pip install matplotlib psutil
+```
+
+*(Opsional) Jika ingin menjalankan skrip pendukung pembuatan dokumen laporan Word di folder `docs/misc/`:*
+```bash
+pip install python-docx
 ```
 
 ---
@@ -85,7 +91,7 @@ pip install matplotlib psutil python-docx
 Jalankan perintah berikut secara berurutan di terminal (PowerShell, Command Prompt, atau terminal WSL):
 
 ### Langkah 1: Persiapan Dataset (Sudah Terunduh Lengkap)
-Dataset sebanyak 1.460 buku teks telah tersedia di folder `data_wc_real/` dengan indeks pada `manifest.csv`. Jika ingin memeriksa integritas atau mengunduh ulang di lingkungan baru:
+Dataset sebanyak 1.460 buku teks telah tersedia lengkap di folder `data_wc_real/` dengan indeks deterministik pada `manifest.csv`. Jika ingin memeriksa integritas atau mengunduh ulang di lingkungan baru:
 ```bash
 python download_data.py
 ```
@@ -97,32 +103,37 @@ python analyzer.py
 ```
 Opsi argumen CLI yang tersedia:
 ```bash
+# Menjalankan konfigurasi kustom
 python analyzer.py --threads 4 --procs 3 --data 1460 --mode hybrid
+
+# Menjalankan mode serial baseline murni
 python analyzer.py --mode serial --data 1460
+
+# Menjalankan validasi ulang terhadap baseline
 python analyzer.py --data 500 --validate
 ```
 
 ### Langkah 3: Menjalankan Benchmark 10 Konfigurasi
-Menjalankan 10 konfigurasi pengujian (masing-masing 3 repetisi dengan warm-up CPU otomatis dan perutean *single source of truth* baseline) ke `results/results.json` serta `results/results.csv`:
+Menjalankan 10 konfigurasi pengujian (masing-masing 3 repetisi dengan warm-up CPU otomatis, stability check, dan perutean *single source of truth* baseline) ke `results/results.json` serta `results/results.csv`:
 ```bash
 python benchmark.py --force
 ```
 *Catatan: Skrip mendukung resumability. Jika terhenti, eksekusi akan melanjutkan konfigurasi yang belum selesai. Gunakan flag `--force` untuk menjalankan ulang seluruh benchmark dari awal.*
 
 ### Langkah 4: Membuat Grafik Analisis (Matplotlib 300 DPI)
-Menghasilkan 5 grafik PNG berkualitas cetak di direktori `results/charts/`:
+Menghasilkan 5 grafik PNG beresolusi tinggi (300 DPI) di direktori `results/charts/`:
 ```bash
 python make_charts.py
 ```
 
-### Langkah 5: Menghasilkan Diagram Arsitektur
-Menghasilkan diagram arsitektur teknis (`arsitektur_hybrid.png` 300 DPI dan `arsitektur_hybrid.svg`):
+### Langkah 5: Menghasilkan Diagram Arsitektur (Opsional)
+Menghasilkan diagram arsitektur teknis sistem (`arsitektur_hybrid.png` 300 DPI):
 ```bash
 python render_diagram.py
 ```
 
 ### Langkah 6: Menjalankan Dashboard Visualisasi Web
-Menjalankan web server lokal untuk melihat dashboard interaktif berbasis Chart.js:
+Menjalankan server web HTTP lokal untuk menyajikan visualisasi data interaktif:
 ```bash
 python serve.py --port 8000
 ```
@@ -132,7 +143,14 @@ Buka browser pada alamat: **`http://localhost:8000`**
 
 ## 6. Ringkasan Hasil Eksperimen Utama (10 Konfigurasi Nyata)
 
-Pengujian dilakukan pada prosesor **AMD Ryzen 5 5600H** (6 Core Fisik / 12 Core Logis, 15.4 GB RAM, Windows 11 64-bit):
+Seluruh pengujian dijalankan pada satu unit mesin (*single-node workstation*) dengan spesifikasi resmi:
+- **Prosesor (CPU):** AMD Ryzen 5 5600H with Radeon Graphics (6 Core Fisik / 12 Core Logis)
+- **Memori Utama (RAM):** 15.4 GB
+- **Sistem Operasi:** Microsoft Windows 11 Home Single Language (Build 26100)
+- **Runtime:** Python 3.11.9 (64-bit)
+- **Penyimpanan:** INTEL SSDPEKNU512GZ NVMe SSD
+
+### Tabel Hasil Pengujian 10 Konfigurasi (Rata-rata 3 Repetisi):
 
 | No | Jumlah Thread | Jumlah Process | Data/Task | Waktu (s) | Speedup | Efisiensi (%) | Keterangan |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
@@ -146,6 +164,19 @@ Pengujian dilakukan pada prosesor **AMD Ryzen 5 5600H** (6 Core Fisik / 12 Core 
 | **8** | **4** | **6** | **1460** | **17.11** | **2.86x** | **47.67%** | **Konfigurasi Tercepat (Throughput 85.32 f/s)** |
 | 9 | 4 | 3 | 500 | 8.30 | 1.92x | 64.00% | Dataset kecil (Baseline 500: 15.92 s) |
 | 10 | 4 | 3 | 1000 | 17.12 | 1.97x | 65.67% | Dataset sedang (Baseline 1000: 33.80 s) |
+
+### Karakteristik Statistik Korpus Teks Gutenberg:
+- **Jumlah Berkas:** 1.460 file teks
+- **Ukuran Mentah Data:** 537,91 MiB (~564,04 MB)
+- **Karakter Bersih:** 532.796.781 karakter
+- **Total Kata Bersih:** 91.700.012 kata
+- **Statistik Ekstraksi:** 153.472.926 vokal | 3.545.233 angka | 21.344.540 simbol | 4.729.834 kalimat
+- **Top-5 Kata Terbanyak:**
+  1. `"the"` : 6.174.819 kali
+  2. `"of"` : 3.316.622 kali
+  3. `"and"` : 2.937.917 kali
+  4. `"to"` : 2.416.580 kali
+  5. `"a"` : 1.925.853 kali
 
 ---
 
@@ -161,25 +192,27 @@ Pengujian dilakukan pada prosesor **AMD Ryzen 5 5600H** (6 Core Fisik / 12 Core 
 
 3. **Throughput ($TP$)**:
    $$TP = \frac{\text{Jumlah File}}{T_{\text{total}}} \quad (\text{file/detik})$$
-   Mengukur laju penyelesaian berkas teks per satuan waktu.
+   Mengukur laju penyelesaian pemrosesan berkas teks per satuan waktu.
 
 ---
 
-## 8. Keputusan Desain & Rekayasa Sistem
+## 8. Keputusan Desain & Rekayasa Performa
 
 1. **Pemisahan Tegas Tahap I/O dan CPU**:
-   - `ThreadPoolExecutor` menangani pembacaan file dan pembersihan Gutenberg. Multi-threading sangat efektif untuk operasi I/O disk karena GIL dilepas selama transfer data dari disk ke buffer memori.
+   - `ThreadPoolExecutor` menangani pembacaan file dan pembersihan Gutenberg. Multi-threading efektif untuk I/O disk karena GIL dilepas selama pembacaan byte dari media penyimpanan ke RAM.
    - `ProcessPoolExecutor` menangani kalkulasi analitik teks (regex kata, vokal, angka, simbol, kalimat, frekuensi kata) untuk memotong batas GIL dengan mendistribusikan beban ke proses independen pada core CPU terpisah.
 2. **Penerapan Batching Adaptif pada IPC (Inter-Process Communication)**:
-   - Objek yang dikirim ke worker ProcessPool adalah batch teks bersih (`List[Tuple[str, str, int]]`), bukan path file. Hal ini menjamin tidak ada operasi I/O berulang pada worker CPU.
+   - Objek yang dikirim ke worker ProcessPool adalah batch teks bersih (`List[Tuple[str, str, int]]`), bukan path file. Hal ini menjamin tidak ada pembacaan disk berulang pada worker CPU.
    - Mengelompokkan file menjadi batch adaptif ($15 \le \text{batch\_size} \le 25$) mereduksi *overhead* pickling/unpickling objek Python lewat socket/pipe IPC.
 3. **Keadilan Pengukuran Baseline (*Fair Baseline*)**:
-   - Jalur serial (`run_serial`) menjalankan fungsi worker `analyze_batch_worker` dan struktur pembagian batch yang sama persis dengan hybrid di proses utama (tanpa pool). Hal ini memastikan bahwa metrik speedup murni mencerminkan percepatan paralelisme hardware, bukan asimetri algoritma.
+   - Jalur serial (`run_serial`) menjalankan fungsi worker `analyze_batch_worker` dan struktur pembagian batch yang sama persis dengan hybrid di proses utama (tanpa pool). Hal ini memastikan bahwa metrik speedup murni mencerminkan percepatan paralelisme hardware, bukan asimetri algoritma atau perbedaan struktur data.
 4. **Single Source of Truth Baseline**:
-   - Baseline untuk setiap ukuran data diukur secara terpusat oleh `benchmark.py` dan disimpan di `results/results.json`. Modul `analyzer.py` membaca langsung dari sumber data tersebut untuk menghindari deviasi angka.
+   - Baseline untuk setiap ukuran data diukur secara terpusat oleh `benchmark.py` dan disimpan di `results/results.json`. Modul `analyzer.py` membaca langsung dari sumber data tersebut untuk menghindari deviasi angka antar-komponen.
 5. **Ketahanan terhadap Drift Mesin (*Robustness against Machine Drift*)**:
-   - Dilengkapi warm-up komputasi CPU sebelum benchmark dimulai agar clock prosesor berada pada kondisi *steady state*.
+   - Dilengkapi warm-up komputasi CPU sebelum benchmark dimulai untuk membantu clock prosesor mencapai kondisi yang lebih stabil sebelum pengukuran.
    - Stability check otomatis: jika variasi repetisi $> 5\%$, konfigurasi otomatis diulang (maksimal 2 retry).
-   - Drift check akhir menguji ulang baseline 500 file di akhir sesi untuk mendeteksi *thermal throttling*.
+   - Drift check akhir menguji ulang baseline 500 file di akhir sesi untuk mendeteksi *thermal throttling* atau pergeseran clock dinamis.
 6. **Kompatibilitas Windows Multiprocessing**:
-   - Sistem operasi Windows menggunakan metode `spawn` (bukan `fork`). Seluruh fungsi worker ditempatkan pada tingkat modul (*top-level*) dan seluruh skrip dilindungi oleh blok `if __name__ == "__main__":`.
+   - Sistem operasi Windows menggunakan metode proses `spawn` (bukan `fork`). Seluruh fungsi worker ditempatkan pada tingkat modul (*top-level*) dan seluruh skrip dilindungi oleh blok `if __name__ == "__main__":`.
+7. **Peniadaan Dependensi Eksternal pada Dashboard Web**:
+   - Antarmuka visualisasi web dibuat menggunakan HTML, CSS modern, dan pustaka `chart.min.js` lokal (tanpa framework, tanpa Node.js/npm, dan tanpa dependensi CDN eksternal) sehingga dapat dijalankan secara instan dalam kondisi offline melalui `python serve.py`.

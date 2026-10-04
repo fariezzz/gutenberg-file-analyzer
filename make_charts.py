@@ -274,8 +274,6 @@ def chart_4_efficiency_vs_configs(configs, output_dir):
             colors.append("#d97706")  # Amber untuk NIM
         elif c["id"] == 2:
             colors.append("#8b5cf6")  # Ungu untuk 4T/1P (efisiensi > 100% karena I/O concurrency)
-        elif c["id"] == 7:
-            colors.append("#10b981")  # Emerald untuk 4T/2P (90.5%)
         else:
             colors.append("#38bdf8")
 
@@ -312,7 +310,7 @@ def chart_4_efficiency_vs_configs(configs, output_dir):
     legend_elements = [
         plt.Line2D([0], [0], color="#ef4444", linestyle="--", linewidth=1.5, label="Efisiensi Ideal (100%)"),
         Patch(facecolor="#d97706", edgecolor="#1e293b", label="Konfigurasi NIM"),
-        Patch(facecolor="#8b5cf6", edgecolor="#1e293b", label="4T / 1P (I/O Concurrency Efek)"),
+        Patch(facecolor="#8b5cf6", edgecolor="#1e293b", label="4T / 1P"),
         Patch(facecolor="#38bdf8", edgecolor="#1e293b", label="Konfigurasi Lainnya"),
     ]
     ax.legend(handles=legend_elements, frameon=True, facecolor="white", edgecolor="#cbd5e1", loc="upper right")
